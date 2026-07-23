@@ -1,0 +1,195 @@
+
+
+
+/*************************       Body       *************************/
+body {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+        background: linear-gradient(
+        180deg,
+        #4CAF50    0%,
+        #A7D7A9 100%
+    );
+    color: var(--text-color);
+}
+
+
+/*************************      Header     *************************/
+.header {
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.header-content {
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.header p {
+    margin-top: var(--spacing-xs);
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/*************************       Main      *************************/
+.main-container {
+    flex: 1;
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+/*************************     Controls    *************************/
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+
+    margin-bottom: var(--spacing-lg);
+}
+
+/*************************      Search     *************************/
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.search-container label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.search-input {
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+
+    background-color: var(--surface-color);
+
+    color: var(--text-color);
+
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.search-input,
+.filter-select {
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .2s ease;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.search-input:focus,
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, .2);
+}
+
+/*************************     Filters     *************************/
+.filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.filter-select {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+/*************************     Buttons     *************************/
+.btn {
+    align-self: flex-end;
+    padding: 0.55rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+/*************************      Results    *************************/
+.results-section {
+    margin-bottom: var(--spacing-md);
+}
+
+.results-info {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/************************* Characters Grid *************************/
+
+/*************************      Cards      *************************/
+
+/*************************    Pagination   *************************/
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    margin-top: var(--spacing-xl);
+}
+
+/*************************      Footer     *************************/
+.footer {
+    margin-top: auto;
+    padding: var(--spacing-lg);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: .9rem;
+}
+/*************************    Utilities    *************************/

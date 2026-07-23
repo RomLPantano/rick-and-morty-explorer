@@ -1,0 +1,39 @@
+:root {
+
+    /* Typography */
+    --font-family: "Poppins", sans-serif;
+
+    /* Colors */
+    --background-start: #4CAF50;
+    --background-end: #A7D7A9;
+
+    --surface-color: #CFE6C8;
+    --surface-hover: #D8ECD2;
+
+    --primary-color: #2E7D32;
+    --secondary-color: #4FC3F7;
+
+    --text-color: #1F2D1F;
+    --text-secondary: #435943;
+
+    --border-color: #7FBF7A;
+
+    --button-text-color: #EDF6ED;
+
+    /* Layout */
+    --max-width: 1200px;
+
+    /* Spacing */
+    --spacing-xs: .5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* Border */
+    --border-radius: 12px;
+
+    /* Effects */
+    --shadow: 0 8px 20px rgba(46, 125, 50, .15);
+    --transition: .3s ease;
+}

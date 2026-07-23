@@ -1,7 +1,9 @@
-* {
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 img {
@@ -13,6 +15,15 @@ button,
 input,
 select {
     font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
 }
 
 body {

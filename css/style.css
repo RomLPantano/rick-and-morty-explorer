@@ -152,12 +152,12 @@ body {
     transition: var(--transition);
 }
 
-.btn:hover {
+button.btn:hover {
     transform: translateY(-2px);
     opacity: .9;
 }
 
-.btn:active {
+button.btn:active {
     transform: translateY(0);
 }
 /*************************      Results    *************************/

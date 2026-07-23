@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick & Morty Explorer</title>
+</head>
+    <body>
+        <!-- NAV -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🛸 Rick & Morty Explorer</h1>
+                <p>Explore every character from the universe</p>
+            </div>     
+        </header>    
+        <!-- MAIN -->
+        <main class="main-container">
+
+            <section class="controls-section">
+
+                <!-- Search -->
+                <div class="search-container">
+                    <label for="search-input">Search</label>
+
+                    <input
+                        type="text"
+                        id="search-input"
+                        class="search-input"
+                        placeholder="Search character..."
+                    >
+                </div>
+
+                <!-- Filters -->
+                <div class="filters-container">
+
+                    <div class="filter-group">
+                        <label for="status-filter">Status</label>
+
+                        <select id="status-filter" class="filter-select">
+                            <option value="">All</option>
+                            <option value="alive">Alive</option>
+                            <option value="dead">Dead</option>
+                            <option value="unknown">Unknown</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="gender-filter">Gender</label>
+
+                        <select id="gender-filter" class="filter-select">
+                            <option value="">All</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="genderless">Genderless</option>
+                            <option value="unknown">Unknown</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sort-select">Sort</label>
+
+                        <select id="sort-select" class="filter-select">
+                            <option value="asc">A-Z</option>
+                            <option value="desc">Z-A</option>
+                        </select>
+                    </div>
+
+                    <button id="reset-button">
+                        Reset
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section class="results-section">
+                <p id="results-info" class="results-info"></p>
+            </section>
+
+            <section id="characters-container" class="characters-grid">
+                <!-- Character cards will be rendered here -->
+            </section>
+
+            <div id="pagination" class="pagination">
+                <!-- Pagination buttons will be rendered here -->
+            </div>
+
+        </main>
+        <!-- MAIN FIN -->
+
+        <!-- MODAL -->
+        <div id="character-modal" class="modal hidden">
+
+        </div>
+        <!-- MODAL FIN -->
+
+        <footer class="footer">
+            <p>Powered by Rick and Morty API</p>
+        </footer> 
+    </body>
+</html>

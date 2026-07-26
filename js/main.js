@@ -1,5 +1,5 @@
 import { getCharacters } from "./api.js";
-import { renderCharacters, renderPagination } from "./ui.js";
+import { renderCharacters, renderPagination, renderModal } from "./ui.js";
 
 /****************** DOM ELEMENTS ********************/
 const $charactersContainer = document.getElementById("characters-container");
@@ -77,7 +77,7 @@ async function loadCharacters() {
         appState.apiInfo = data.info;
 
         sortCharacters();
-        renderCharacters(appState.currentCharacters, $charactersContainer);
+        renderCharacters(appState.currentCharacters, $charactersContainer, handleCharacterClick);
         renderPagination($pagination, appState.apiInfo, appState.currentPage, changePage);
 
     } catch (error) {
@@ -134,6 +134,11 @@ function resetFilters() {
     appState.currentPage = 1;
 
     loadCharacters();
+}
+
+function handleCharacterClick(character) {
+    appState.selectedCharacter = character;
+    renderModal(character);
 }
 
 /****************** HELPERS ********************/

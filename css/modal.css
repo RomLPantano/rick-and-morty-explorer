@@ -1,0 +1,38 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .6);
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    width: min(90%, 500px);
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    position: relative;
+}
+
+.modal-image {
+    width: 180px;
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    cursor: pointer;
+}

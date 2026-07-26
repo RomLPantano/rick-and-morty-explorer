@@ -1,14 +1,14 @@
 
-export function renderCharacters(characters, container) {
+export function renderCharacters(characters, container, onCharacterClick) {
     container.innerHTML = "";
 
     characters.forEach(character => {
-        const card = createCharacterCard(character);
+        const card = createCharacterCard(character, onCharacterClick);
         container.append(card);
     });
 }
 
-function createCharacterCard(character) {
+function createCharacterCard(character, onCharacterClick) {
     const card = document.createElement("article");
     card.classList.add("character-card");
 
@@ -49,6 +49,11 @@ function createCharacterCard(character) {
     content.append(name, status, species);
 
     card.append(image, content);
+
+    card.addEventListener("click", () => {
+        onCharacterClick(character);
+    });
+
     return card;
 }
 
@@ -101,7 +106,34 @@ function createPaginationButton(text) {
     return button;
 }
 
-//renderModal()      
+/****************** Modal ********************/
+
+export function renderModal(character) {
+    const modal = document.getElementById("character-modal");
+
+    modal.innerHTML = `
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img src="${character.image}" alt="${character.name}" class="modal-image">
+            <h2>${character.name}</h2>
+            <p>${character.status}</p>
+            <p><strong>Species:</strong> ${character.species}</p>
+            <p><strong>Gender:</strong> ${character.gender}</p>
+            <p><strong>Origin:</strong> ${character.origin.name}</p>
+            <p><strong>Location:</strong> ${character.location.name}</p>
+            <p><strong>Episodes:</strong> ${character.episode.length}</p>
+        </div>
+    `;
+
+    const closeButton = modal.querySelector(".modal-close");
+
+    closeButton.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+
+    modal.classList.remove("hidden");
+}
+//closeModal() 
 
 //showLoader()       
 

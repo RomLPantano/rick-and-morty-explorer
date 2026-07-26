@@ -22,11 +22,11 @@ function createCharacterCard(character) {
     name.classList.add("character-name");
 
     const status = document.createElement("p");
-    status.textContent = character.status;
+    status.textContent = `Status: ${character.status}`;
     status.classList.add("character-status");
 
     const species = document.createElement("p");
-    species.textContent = character.species;
+    species.textContent = `Species: ${character.species}`;
     species.classList.add("character-species");
 
     const content = document.createElement("div");

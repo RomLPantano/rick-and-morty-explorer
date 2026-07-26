@@ -54,6 +54,8 @@ function initializeEvents() {
     $genderFilter.addEventListener("change", handleGenderFilter);
     
     $btnReset.addEventListener("click", resetFilters);
+
+    $sortSelect.addEventListener("change", handleSort);
 }
 
 /****************** Main functions ********************/
@@ -70,11 +72,11 @@ async function loadCharacters() {
        // const { currentPage } = appState;
         const data = await getCharacters(appState);
 
-        console.log(data);
-
+        appState.apiInfo = data.info;
         appState.currentCharacters = data.results;
         appState.apiInfo = data.info;
 
+        sortCharacters();
         renderCharacters(appState.currentCharacters, $charactersContainer);
         renderPagination($pagination, appState.apiInfo, appState.currentPage, changePage);
 
@@ -113,7 +115,10 @@ function handleGenderFilter() {
 }
 
 function handleSort() {
-
+    appState.sort = $sortSelect.value;
+    
+    sortCharacters();
+    renderCharacters(appState.currentCharacters, $charactersContainer);
 }
 
 function resetFilters() {
@@ -135,6 +140,19 @@ function resetFilters() {
 function reloadFromFirstPage() {
     appState.currentPage = 1;
     loadCharacters();
+}
+
+function sortCharacters() {
+    if (appState.sort === "asc") {
+        appState.currentCharacters.sort((a, b) =>
+            a.name.localeCompare(b.name)
+        );
+
+    } else {
+        appState.currentCharacters.sort((a, b) =>
+            b.name.localeCompare(a.name)
+        );
+    }
 }
 
 console.log(appState);

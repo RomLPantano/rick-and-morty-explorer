@@ -25,6 +25,21 @@ function createCharacterCard(character) {
     status.textContent = `Status: ${character.status}`;
     status.classList.add("character-status");
 
+    status.classList.add("character-status");
+
+    switch (character.status) {
+        case "Alive":
+            status.classList.add("status-alive");
+            break;
+
+        case "Dead":
+            status.classList.add("status-dead");
+            break;
+
+        default:
+            status.classList.add("status-unknown");
+    }
+
     const species = document.createElement("p");
     species.textContent = `Species: ${character.species}`;
     species.classList.add("character-species");
@@ -85,3 +100,9 @@ function createPaginationButton(text) {
     button.classList.add("btn");
     return button;
 }
+
+//renderModal()      
+
+//showLoader()       
+
+//showError()       

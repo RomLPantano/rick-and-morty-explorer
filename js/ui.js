@@ -1,4 +1,3 @@
-
 export function renderCharacters(characters, container, onCharacterClick) {
     container.innerHTML = "";
 
@@ -104,6 +103,24 @@ function createPaginationButton(text) {
     button.textContent = text;
     button.classList.add("btn");
     return button;
+}
+
+export function renderEmptyState(container) {
+    container.innerHTML = `
+        <div class="empty-state">
+            <h2>👽</h2>
+            <h3>No characters found</h3>
+            <p>Try another search.</p>
+        </div> `;
+}
+
+export function renderLoader(container){  //no se usa
+    container.innerHTML = `
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <p>Loading characters...</p>
+        </div>
+    `;
 }
 
 /****************** Modal ********************/
@@ -218,8 +235,22 @@ function closeModal() {
     document.body.style.overflow = "";
 }
 
+/****************** Skeleton Loader ********************/
+export function renderSkeleton(container, amount = 20) {
 
+    container.innerHTML = "";
 
-//showLoader()       
+    for (let index = 0; index < amount; index++) {
+        const skeleton = document.createElement("article");
 
-//showError()       
+        skeleton.className = "character-card skeleton-card";
+        skeleton.innerHTML = `
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>`;
+
+        container.appendChild(skeleton);
+    }
+
+}

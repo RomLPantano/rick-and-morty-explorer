@@ -1,5 +1,6 @@
+import { loadSavedState, saveState } from "./storage.js";
 import { getCharacters } from "./api.js";
-import { renderCharacters, renderPagination, renderModal } from "./ui.js";
+import { renderCharacters, renderPagination, renderModal, renderEmptyState, renderSkeleton} from "./ui.js";
 
 /****************** DOM ELEMENTS ********************/
 const $charactersContainer = document.getElementById("characters-container");
@@ -12,6 +13,7 @@ const $genderFilter = document.getElementById("gender-filter");
 const $sortSelect = document.getElementById("sort-select");
 const $btnReset = document.getElementById("reset-button");
 const $pagination = document.getElementById("pagination");
+const $resultsInfo = document.getElementById("results-info");
 
 /****************** APPLICATION STATE ********************/
 
@@ -34,6 +36,17 @@ const appState = {
 const SEARCH_DELAY = 500;
 
 /****************** Initialization ********************/
+const savedState = loadSavedState();
+
+if (savedState) {
+    Object.assign(appState, savedState);
+}
+
+$search.value = appState.search;
+$statusFilter.value = appState.status;
+$genderFilter.value = appState.gender;
+$sortSelect.value = appState.sort;
+
 initializeEvents();
 loadCharacters();
 
@@ -61,15 +74,11 @@ function initializeEvents() {
 /****************** Main functions ********************/
 async function loadCharacters() {
 
-    $charactersContainer.innerHTML = `
-        <div class="loader">
-            <div class="loader-spinner"></div>
-            <p>Loading characters...</p>
-        </div>
-    `;
+    //renderLoader($charactersContainer);
 
     try {
-       // const { currentPage } = appState;
+        renderSkeleton($charactersContainer);
+
         const data = await getCharacters(appState);
 
         appState.apiInfo = data.info;
@@ -80,13 +89,15 @@ async function loadCharacters() {
         renderCharacters(appState.currentCharacters, $charactersContainer, handleCharacterClick);
         renderPagination($pagination, appState.apiInfo, appState.currentPage, changePage);
 
+        $resultsInfo.textContent = `${data.info.count} characters found`;
     } catch (error) {
 
-        console.error(error);
+        appState.currentCharacters = [];
+        $charactersContainer.innerHTML = "";
+        $pagination.innerHTML = "";
+        $resultsInfo.textContent = "No characters found.";
 
-        $charactersContainer.innerHTML = `
-            <p>Failed to load characters.</p>
-        `;
+        renderEmptyState($charactersContainer);
     }
 
 }
@@ -94,7 +105,7 @@ async function loadCharacters() {
 async function changePage(page) {
     appState.currentPage = page;
     await loadCharacters();
-    console.log(appState);
+    saveState(appState);
 }
 
 /******************     Filters     ********************/
@@ -118,7 +129,7 @@ function handleSort() {
     appState.sort = $sortSelect.value;
     
     sortCharacters();
-    renderCharacters(appState.currentCharacters, $charactersContainer);
+    renderCharacters(appState.currentCharacters, $charactersContainer, handleCharacterClick);
 }
 
 function resetFilters() {
@@ -134,6 +145,7 @@ function resetFilters() {
     appState.currentPage = 1;
 
     loadCharacters();
+    saveState(appState);
 }
 
 function handleCharacterClick(character) {
@@ -145,6 +157,7 @@ function handleCharacterClick(character) {
 function reloadFromFirstPage() {
     appState.currentPage = 1;
     loadCharacters();
+    saveState(appState);
 }
 
 function sortCharacters() {

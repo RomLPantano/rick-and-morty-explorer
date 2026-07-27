@@ -1,14 +1,14 @@
 
-export function renderCharacters(characters, container) {
+export function renderCharacters(characters, container, onCharacterClick) {
     container.innerHTML = "";
 
     characters.forEach(character => {
-        const card = createCharacterCard(character);
+        const card = createCharacterCard(character, onCharacterClick);
         container.append(card);
     });
 }
 
-function createCharacterCard(character) {
+function createCharacterCard(character, onCharacterClick) {
     const card = document.createElement("article");
     card.classList.add("character-card");
 
@@ -49,6 +49,11 @@ function createCharacterCard(character) {
     content.append(name, status, species);
 
     card.append(image, content);
+
+    card.addEventListener("click", () => {
+        onCharacterClick(character);
+    });
+
     return card;
 }
 
@@ -101,7 +106,119 @@ function createPaginationButton(text) {
     return button;
 }
 
-//renderModal()      
+/****************** Modal ********************/
+
+export function renderModal(character) {
+    const modal = document.getElementById("character-modal");
+
+    modal.innerHTML = `
+    <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-header">
+            <img src="${character.image}" alt="${character.name}" class="modal-image">
+
+            <div class="modal-title">
+                <h2>${character.name}</h2>
+                <p class="character-status ${getStatusClass(character.status)}">
+                    ${character.status}
+                </p>
+            </div>
+        </div>
+
+        <div class="modal-info">
+            <div class="info-item">
+                <span>Species</span>
+                <p>${character.species}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Gender</span>
+                <p>${getGenderIcon(character.gender)} ${character.gender}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Origin</span>
+                <p>${character.origin.name}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Last Location</span>
+                <p>${character.location.name}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Episodes</span>
+                <p>${ formatEpisodes(character)}</p>
+            </div>
+        </div>
+    </div>
+    `;
+
+    document.body.style.overflow = "hidden";
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    const closeButton = modal.querySelector(".modal-close");
+    closeButton.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+
+    modal.classList.remove("hidden");
+
+}
+
+function getStatusClass(status) {
+    switch (status) {
+        case "Alive":
+            return "status-alive";
+        case "Dead":
+            return "status-dead";
+        default:
+            return "status-unknown";
+    }
+}
+
+
+function getGenderIcon(gender) {
+    switch (gender) {
+        case "Male":
+            return "♂";
+
+        case "Female":
+            return "♀";
+
+        case "Genderless":
+            return "⚪";
+
+        default:
+            return "❓";
+    }
+}
+
+function formatEpisodes(character) {
+    const total = character.episode.length;
+
+    return total === 1
+        ? "1 Episode"
+        : `${total} Episodes`;
+}
+
+function closeModal() {
+    const modal = document.getElementById("character-modal");
+    modal.classList.add("hidden");
+    modal.innerHTML = "";
+    document.body.style.overflow = "";
+}
+
+
 
 //showLoader()       
 

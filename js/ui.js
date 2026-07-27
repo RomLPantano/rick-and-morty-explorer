@@ -112,28 +112,113 @@ export function renderModal(character) {
     const modal = document.getElementById("character-modal");
 
     modal.innerHTML = `
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
+    <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-header">
             <img src="${character.image}" alt="${character.name}" class="modal-image">
-            <h2>${character.name}</h2>
-            <p>${character.status}</p>
-            <p><strong>Species:</strong> ${character.species}</p>
-            <p><strong>Gender:</strong> ${character.gender}</p>
-            <p><strong>Origin:</strong> ${character.origin.name}</p>
-            <p><strong>Location:</strong> ${character.location.name}</p>
-            <p><strong>Episodes:</strong> ${character.episode.length}</p>
+
+            <div class="modal-title">
+                <h2>${character.name}</h2>
+                <p class="character-status ${getStatusClass(character.status)}">
+                    ${character.status}
+                </p>
+            </div>
         </div>
+
+        <div class="modal-info">
+            <div class="info-item">
+                <span>Species</span>
+                <p>${character.species}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Gender</span>
+                <p>${getGenderIcon(character.gender)} ${character.gender}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Origin</span>
+                <p>${character.origin.name}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Last Location</span>
+                <p>${character.location.name}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Episodes</span>
+                <p>${ formatEpisodes(character)}</p>
+            </div>
+        </div>
+    </div>
     `;
 
-    const closeButton = modal.querySelector(".modal-close");
+    document.body.style.overflow = "hidden";
 
-    closeButton.addEventListener("click", () => {
-        modal.classList.add("hidden");
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    const closeButton = modal.querySelector(".modal-close");
+    closeButton.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeModal();
+        }
     });
 
     modal.classList.remove("hidden");
+
 }
-//closeModal() 
+
+function getStatusClass(status) {
+    switch (status) {
+        case "Alive":
+            return "status-alive";
+        case "Dead":
+            return "status-dead";
+        default:
+            return "status-unknown";
+    }
+}
+
+
+function getGenderIcon(gender) {
+    switch (gender) {
+        case "Male":
+            return "♂";
+
+        case "Female":
+            return "♀";
+
+        case "Genderless":
+            return "⚪";
+
+        default:
+            return "❓";
+    }
+}
+
+function formatEpisodes(character) {
+    const total = character.episode.length;
+
+    return total === 1
+        ? "1 Episode"
+        : `${total} Episodes`;
+}
+
+function closeModal() {
+    const modal = document.getElementById("character-modal");
+    modal.classList.add("hidden");
+    modal.innerHTML = "";
+    document.body.style.overflow = "";
+}
+
+
 
 //showLoader()       
 

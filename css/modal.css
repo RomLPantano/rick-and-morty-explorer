@@ -8,6 +8,13 @@
     z-index: 1000;
 }
 
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
 .hidden {
     display: none;
 }
@@ -21,10 +28,24 @@
 }
 
 .modal-image {
-    width: 180px;
-    display: block;
-    margin: 0 auto 1rem;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    transition: transform .3s;
+}
+
+
+.modal-title h2 {
+    margin-bottom: .5rem;
+    font-size: 2rem;
+}
+
+.modal-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
 }
 
 .modal-close {
@@ -35,4 +56,48 @@
     background: transparent;
     font-size: 2rem;
     cursor: pointer;
+}
+
+.info-item {
+    background: var(--background-color);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.info-item span {
+    display: block;
+    font-size: .8rem;
+    color: var(--text-secondary);
+    margin-bottom: .3rem;
+}
+
+.info-item p {
+    font-weight: 600;
+}
+
+.modal-content {
+    animation: modalAppear .25s ease;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    } to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .modal-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .modal-info {
+        grid-template-columns: 1fr;
+    }
+
 }

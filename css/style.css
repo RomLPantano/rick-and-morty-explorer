@@ -189,6 +189,18 @@ button.btn:active {
     font-weight: 500;
 }
 
+.empty-state{
+    padding:4rem;
+    text-align:center;
+}
+
+.empty-state h2{
+    font-size:4rem;
+}
+
+.empty-state h3{
+    margin-top:1rem;
+}
 /************************* Characters Grid *************************/
 .characters-grid {
     display: grid;

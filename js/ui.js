@@ -106,6 +106,24 @@ function createPaginationButton(text) {
     return button;
 }
 
+export function renderEmptyState(container) {
+    container.innerHTML = `
+        <div class="empty-state">
+            <h2>👽</h2>
+            <h3>No characters found</h3>
+            <p>Try another search.</p>
+        </div> `;
+}
+
+export function renderLoader(container){
+    container.innerHTML = `
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <p>Loading characters...</p>
+        </div>
+    `;
+}
+
 /****************** Modal ********************/
 
 export function renderModal(character) {

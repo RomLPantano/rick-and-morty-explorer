@@ -27,5 +27,3 @@ export async function getCharacters(appState) {
     }
     return await response.json();
 }
-
-//getCharacterById() 

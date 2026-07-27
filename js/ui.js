@@ -1,4 +1,3 @@
-
 export function renderCharacters(characters, container, onCharacterClick) {
     container.innerHTML = "";
 
@@ -115,7 +114,7 @@ export function renderEmptyState(container) {
         </div> `;
 }
 
-export function renderLoader(container){
+export function renderLoader(container){  //no se usa
     container.innerHTML = `
         <div class="loader">
             <div class="loader-spinner"></div>
@@ -236,8 +235,22 @@ function closeModal() {
     document.body.style.overflow = "";
 }
 
+/****************** Skeleton Loader ********************/
+export function renderSkeleton(container, amount = 20) {
 
+    container.innerHTML = "";
 
-//showLoader()       
+    for (let index = 0; index < amount; index++) {
+        const skeleton = document.createElement("article");
 
-//showError()       
+        skeleton.className = "character-card skeleton-card";
+        skeleton.innerHTML = `
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>`;
+
+        container.appendChild(skeleton);
+    }
+
+}

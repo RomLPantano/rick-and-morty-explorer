@@ -65,7 +65,6 @@ input:focus-visible {
 }
 
 /*************************      Search     *************************/
-
 .search-container {
     display: flex;
     flex-direction: column;
@@ -115,6 +114,7 @@ input:focus-visible {
 .search-input::placeholder {
     color: var(--text-secondary);
 }
+
 /*************************     Filters     *************************/
 .filters-container {
     display: flex;
@@ -150,6 +150,7 @@ input:focus-visible {
     outline: none;
     border-color: var(--primary-color);
 }
+
 /*************************     Buttons     *************************/
 .btn {
     align-self: flex-end;
@@ -177,6 +178,7 @@ button.btn:active {
     cursor: not-allowed;
     transform: none;
 }
+
 /*************************      Results    *************************/
 .results-section {
     font-weight: 600;
@@ -201,6 +203,7 @@ button.btn:active {
 .empty-state h3{
     margin-top:1rem;
 }
+
 /************************* Characters Grid *************************/
 .characters-grid {
     display: grid;
@@ -296,8 +299,6 @@ button.btn:active {
     margin-top: var(--spacing-xl);
 }
 
-
-
 .pagination .btn:disabled {
     opacity: 0.45;
     cursor: not-allowed;
@@ -313,6 +314,7 @@ button.btn:active {
     color: var(--text-secondary);
     font-size: .9rem;
 }
+
 /*************************      Spinner     *************************/
 .loader {
     display: flex;
@@ -337,4 +339,55 @@ button.btn:active {
     }
 }
 
-/*************************    Utilities    *************************/
+/*************************    Skeleton    *************************/
+.skeleton-card {
+    pointer-events: none;
+}
+
+.skeleton {
+    background: #c9d7c5;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-image {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.skeleton-title {
+    height: 24px;
+    margin-bottom: .8rem;
+}
+
+.skeleton-text {
+    height: 14px;
+    margin-bottom: .6rem;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+    animation: skeleton-loading 1.2s infinite;
+}
+
+@keyframes skeleton-loading {
+    100% {
+        transform: translateX(100%);
+    }
+}

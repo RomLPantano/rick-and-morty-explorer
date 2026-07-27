@@ -1,6 +1,6 @@
 import { loadSavedState, saveState } from "./storage.js";
 import { getCharacters } from "./api.js";
-import { renderCharacters, renderPagination, renderModal, renderEmptyState, renderLoader} from "./ui.js";
+import { renderCharacters, renderPagination, renderModal, renderEmptyState, renderSkeleton} from "./ui.js";
 
 /****************** DOM ELEMENTS ********************/
 const $charactersContainer = document.getElementById("characters-container");
@@ -74,10 +74,11 @@ function initializeEvents() {
 /****************** Main functions ********************/
 async function loadCharacters() {
 
-    renderLoader($charactersContainer);
+    //renderLoader($charactersContainer);
 
     try {
-       // const { currentPage } = appState;
+        renderSkeleton($charactersContainer);
+
         const data = await getCharacters(appState);
 
         appState.apiInfo = data.info;

@@ -60,26 +60,12 @@ https://rickandmortyapi.com/
 
 ---
 
-## 🎨 Screenshots
-
-Add screenshots of the application here.
-
-### Home
-
-*(Insert image)*
-
-### Character Modal
-
-*(Insert image)*
-
----
-
 ## ⚙️ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/your-user/project-name.git
+git clone https://github.com/RomLPantano/rick-and-morty-explorer.git
 ```
 
 Open `index.html` in your browser.
